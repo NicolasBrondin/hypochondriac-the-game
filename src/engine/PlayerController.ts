@@ -1,6 +1,6 @@
 import { GameController, GameItem } from "./GameController";
 
-import NormalPlayerFace from "../assets/img/player/normal.jpg";
+import NormalPlayerFace from "../assets/img/player/normal.png";
 
 export class PlayerController {
     text: string = "";

@@ -9,15 +9,12 @@ html, body {
   position: relative;
   width: 100vw;
   height: 100vh;
-  background-image: url(./assets/img/background.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  background-color: black;
 }
 
 @font-face {
   font-family: VT323;
-  src: url(./assets/font/VT323.ttf);
+  src: url(./assets/font/PixelifySans.ttf);
 }
 
 * {

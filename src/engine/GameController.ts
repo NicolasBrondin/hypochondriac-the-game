@@ -43,6 +43,7 @@ export type GameLevel = {
     name: string;
     items: GameItem[];
     backgroundMusic: any;
+    backgroundImage: any;
     initialPlayerText: string;
 }
 
@@ -112,7 +113,6 @@ export class GameController {
         }
         if(mergeRule){
             this.audio.playEffectAudio(CraftSoundEffect);
-            this.player.say("J'ai fusionné deux items !");
             this.player.inventory.push({...mergeRule.newItem});
             if(mergeRule.shouldRemoveItem){
                 const index1 = this.player.inventory.findIndex(i => i.id === item1.id);
@@ -158,7 +158,6 @@ export class GameController {
         if(index > -1)
         this.currentLevel?.items.splice(index, 1);
         this.audio.playEffectAudio(TakeSoundEffect);
-        this.player.say("J'ai pris un item!");
     }
 
     destroy(){
