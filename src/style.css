@@ -15,6 +15,11 @@ html, body {
   background-position: center;
 }
 
+@font-face {
+  font-family: VT323;
+  src: url(./assets/font/VT323.ttf);
+}
+
 * {
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -22,4 +27,5 @@ html, body {
   -o-user-select: none;
   user-select: none;
   box-sizing: border-box;
+  font-family: VT323;
 }

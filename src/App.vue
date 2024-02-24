@@ -11,7 +11,6 @@
 import { Ref, computed, onBeforeMount, onBeforeUnmount, onMounted, ref } from 'vue';
 import Item from './components/Item.vue';
 import Player from './components/Player.vue';
-import LampSprite from './assets/img/items/lamp.png';
 import Inventory from './components/Inventory.vue';
 import { GameController } from './engine/GameController';
 export default {
@@ -21,23 +20,9 @@ export default {
     Player
 },
   setup(){
-    const items = ref([{
-      id:"lamp",
-      image: LampSprite,
-      x: "650",
-      y: "220",
-      width: "50",
-      height: "50"
-    },{
-      id:"lamp2",
-      image: LampSprite,
-      x: "250",
-      y: "220",
-      width: "50",
-      height: "50"
-    }]);
+    const items = computed(()=>game.value.currentLevel?.items);
 
-    const playerInventory = ref([]);
+    const playerInventory = computed(()=>game.value.player.inventory);
     const dragging = ref();
     const game: Ref<GameController> = ref(new GameController(this));
     const playerSpeech = computed(()=>game.value.player.text);
@@ -52,10 +37,6 @@ export default {
       })
 
     function takeObject(item: any){
-      playerInventory.value.push(item);
-      const index = items.value.findIndex(it=>it.id === item.id);
-      if(index > -1)
-      items.value.splice(index, 1);
       game.value.takeItem(item);
     }
 
@@ -67,7 +48,6 @@ export default {
             }
         }
         function drop(){
-            console.log("STOP");
             dragging.value = null;
         }
 
