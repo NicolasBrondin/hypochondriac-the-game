@@ -1,6 +1,6 @@
 <template>
     <button @click="onClick" @mouseup="onDrop" :style="computedStyle">
-        <img :src="data.image"/>
+        <img :src="data.image" v-if="data.image"/>
     </button>
 </template>
 
@@ -28,7 +28,7 @@ export default defineComponent({
 
         function onDrop(){
             if(props.currentItem){
-                (props.game as any).useItems(props.currentItem, props.data)
+                (props.game as any).useItems(props.data, props.currentItem)
             }
         }
 

@@ -1,5 +1,6 @@
 <template>
-    <Item :data="i" v-for="i in items" @interaction="takeObject" :game="game" :currentItem="dragging"/>
+    <div class="transition-overlay" :class="{'active': isOverlayDisplayed}">{{ game.currentLevel?.name }}</div>
+    <Item :data="i" v-for="i in items" @interaction="interact" :game="game" :currentItem="dragging"/>
     <div class="hud">
       <Player :speech="playerSpeech" :game="game"/>
       <Inventory :data="playerInventory" :game="game" @selection="selectItem" :currentItem="dragging"/>
@@ -24,7 +25,12 @@ export default {
 
     const playerInventory = computed(()=>game.value.player.inventory);
     const dragging = ref();
-    const game: Ref<GameController> = ref(new GameController(this));
+
+    const isOverlayDisplayed = ref(false);
+    const game: Ref<GameController> = ref(new GameController(()=>{
+      isOverlayDisplayed.value = true;
+      setTimeout(()=>isOverlayDisplayed.value = false, 1000);
+    }));
     const playerSpeech = computed(()=>game.value.player.text);
 
     onMounted(()=>{
@@ -36,26 +42,27 @@ export default {
         game.value.destroy();
       })
 
-    function takeObject(item: any){
-      game.value.takeItem(item);
+    function interact(item: any){
+      game.value.interactWithItem(item);
     }
 
 
     function moveDrag(ev: MouseEvent){
-            if(dragging.value){
-                dragging.value.x = ev.x - (dragging.value.width / 2);
-                dragging.value.y = ev.y - (dragging.value.width / 2);
-            }
-        }
-        function drop(){
-            dragging.value = null;
-        }
+      if(dragging.value){
+          dragging.value.x = ev.x - (dragging.value.width / 2);
+          dragging.value.y = ev.y - (dragging.value.width / 2);
+      }
+    }
 
-        function selectItem(item: any){
-          dragging.value = item;
-        }
+    function drop(){
+        dragging.value = null;
+    }
 
-    return { game, items, playerInventory, takeObject, playerSpeech, dragging, moveDrag, drop, selectItem };
+    function selectItem(item: any){
+      dragging.value = item;
+    }
+
+    return { game, items, playerInventory, interact, playerSpeech, dragging, moveDrag, drop, selectItem, isOverlayDisplayed };
   }
 }
 </script>
@@ -90,4 +97,31 @@ img {
 .hud>* {
   flex: 1;
 }
+
+.transition-overlay {
+  position: absolute;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1F1F1F;
+  color: white;
+  font-size: 60px;
+  z-index: 2;
+  transition: all 0.5s linear;
+  transition-delay: 0.5s;
+}
+
+.transition-overlay.active {
+  opacity: 1.0;
+  transition: none;
+}
+
+
+
 </style>
