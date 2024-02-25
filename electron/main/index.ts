@@ -48,8 +48,8 @@ async function createWindow() {
   win = new BrowserWindow({
     title: 'Main window',
     icon: join(process.env.VITE_PUBLIC, 'favicon.ico'),
-    width: 800,
-    height: 600,
+    width: 1200,
+    height: 800,
     resizable: true,
     webPreferences: {
       preload,

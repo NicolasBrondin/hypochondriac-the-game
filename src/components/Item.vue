@@ -5,22 +5,29 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue';
+import { PropType, computed, defineComponent } from 'vue';
+import { GameController } from '../engine/GameController';
 
 export default defineComponent({
     props: {
+        container: { type: Object },
         data: { type: Object, default: {}},
         currentItem: { type: Object},
-        game: { type: Object }
+        game: { type: Object as PropType<GameController> }
     },
     emits: ["interaction", "use"],
     setup(props, { emit }){
         const computedStyle = computed(()=>{
+            const ratio = props.game?.playgroundSize.height / props.game?.playgroundSourceSize.height;
+            const width = props.data.width * ratio;
+            const height = props.data.height * ratio;
+            const x = (props.data.x * ratio) - (width / 2);
+            const y = (props.data.y * ratio) - (width / 2);
             const arr: string[] = [
-                `top: ${props.data.y}px`,
-                `left: ${props.data.x}px`,
-                `width: ${props.data.width}px`,
-                `height: ${props.data.height}px`,
+                `top: calc(50% + ${y}px)`,
+                `left: calc(50% + ${x}px)`,
+                `width: ${width}px`,
+                `height: ${height}px`,
             ]
             console.log(arr.join(";"))
             return arr.join(";");
@@ -46,6 +53,7 @@ export default defineComponent({
         background: none;
         border: none;
         outline: none;
+        cursor: pointer;
     }
 
     .debug button {

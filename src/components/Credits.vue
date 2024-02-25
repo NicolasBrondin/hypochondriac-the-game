@@ -1,8 +1,11 @@
 <template>
     <div class="credits" :class="gameState">
-        <p>Marine Drouin</p>
+        <p>Crédits :</p>
+        <p></p>
         <p>Réma</p>
+        <p>Marine Drouin</p>
         <p>Nicolas Brondin-Bernard</p>
+        <p>Copyrights : Yoyo Games</p>
     </div>
 </template>
 
@@ -28,8 +31,8 @@ export default defineComponent({
 }
 
 @keyframes slide {
-    0% { transform: translateY(500px)}
-    100% { transform: translateY(-500px)}
+    0% { transform: translateY(400px)}
+    100% { transform: translateY(-400px)}
 }
 
 .credits p {

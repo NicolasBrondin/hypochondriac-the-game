@@ -4,6 +4,7 @@ import Level2BackgroundImage from '../assets/img/levels/level-2.png';
 import Level3BackgroundImage from '../assets/img/levels/level-3.png';
 import LampSprite from '../assets/img/items/lamp.png';
 import GelSprite from '../assets/img/items/gel.png';
+import ForkSprite from '../assets/img/items/fork.png';
 
 
 const gelItem = {
@@ -25,10 +26,10 @@ export default [
         initialPlayerText: "Je dois sortir d'ici... Je ne suis pas folle !",
         items: [{
             id:"door",
-            x: "100",
-            y: "150",
-            width: "50",
-            height: "50",
+            x: "0",
+            y: "-300",
+            width: "400",
+            height: "500",
             state: "dirty",
             mergeWith: [],
             interactions: [
@@ -59,10 +60,10 @@ export default [
           },{
             id:"lamp",
             image: LampSprite,
-            x: "650",
-            y: "220",
-            width: "50",
-            height: "50",
+            x: "350",
+            y: "-50",
+            width: "130",
+            height: "130",
             mergeWith: [],
             interactions: [{ 
                 stateCondition: null,
@@ -73,10 +74,10 @@ export default [
           },{
             id:"lamp2",
             image: LampSprite,
-            x: "200",
-            y: "320",
-            width: "50",
-            height: "50",
+            x: "-700",
+            y: "90",
+            width: "100",
+            height: "100",
             mergeWith: [
                 { item: "lamp", isBidirectional: true, newItem: gelItem, shouldRemoveItem: true}
             ],
@@ -127,8 +128,8 @@ export default [
                 }
             ]
           },{
-            id:"lamp",
-            image: LampSprite,
+            id:"fork",
+            image: ForkSprite,
             x: "650",
             y: "220",
             width: "50",
@@ -141,21 +142,23 @@ export default [
                 }]
             }]
           },{
-            id:"lamp2",
+            id:"socket",
             image: LampSprite,
             x: "200",
             y: "320",
             width: "50",
             height: "50",
-            mergeWith: [
-                { item: "lamp", isBidirectional: true, newItem: gelItem, shouldRemoveItem: true}
-            ],
-            interactions: [{ 
-                stateCondition: null,
-                actions: [{
-                    action: "take" 
-                }]
-            }]
+            mergeWith: [],
+            interactions: [],
+            uses: [
+                { 
+                    item: "fork", 
+                    stateCondition: null, 
+                    actions: [
+                        { action: "loose"},
+                    ] 
+                }
+            ]
           }]
     },
     {

@@ -36,7 +36,11 @@ export type GameItem = {
     state?: string;
     mergeWith: MergeRule[],
     interactions: InteractionRule[]
-    uses: UseRule[]
+    uses: UseRule[];
+    x: number;
+    y: number;
+    width: number;
+    height: number; //reference is 1920/1080
 }
 
 export type GameLevel = {
@@ -55,6 +59,8 @@ export class GameController {
     onLevelLoaded: any = null;
     audio: AudioController;
     player: PlayerController;
+    playgroundSize: { width: number; height: number } = { width: 0, height: 0};
+    playgroundSourceSize: { width: number; height: number } = { width: 1920, height: 1080};
 
     constructor(onLevelLoaded: any){
         this.onLevelLoaded = onLevelLoaded;
@@ -143,6 +149,8 @@ export class GameController {
                             this.player.setEmotion(action.value);
                         } else if(action.action === "win"){
                             this.finishCurrentLevel();
+                        } else if(action.action === "loose"){
+                            this.onLevelLoaded(true,"lost");
                         } else {
                             this.audio.playEffectAudio(ClickSoundEffect);
                         }
@@ -163,6 +171,10 @@ export class GameController {
         if(index > -1)
         this.currentLevel?.items.splice(index, 1);
         this.audio.playEffectAudio(TakeSoundEffect);
+    }
+
+    refreshSize(width: number, height: number){
+        this.playgroundSize = {height, width: height * (16/9)}
     }
 
     destroy(){

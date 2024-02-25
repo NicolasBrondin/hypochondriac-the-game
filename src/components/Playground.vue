@@ -1,8 +1,8 @@
 <template>
-  <div id="playground" :style="'background-image: url('+game.currentLevel?.backgroundImage+')'">
+  <div id="playground" ref="playgroundContainer" :style="'background-image: url('+game.currentLevel?.backgroundImage+')'">
       <div class="gradient"></div>
       <div class="transition-overlay" :class="{'active': isOverlayDisplayed}">{{ game.currentLevel?.name }}</div>
-      <Item :data="i" v-for="i in items" @interaction="interact" :game="game" :currentItem="dragging"/>
+      <Item :data="i" v-for="i in items" @interaction="interact" :game="game" :currentItem="dragging" :container="playgroundContainer"/>
       <div class="hud">
         <Player :speech="playerSpeech" :game="game"/>
         <Inventory :data="playerInventory" :game="game" @selection="selectItem" :currentItem="dragging"/>
@@ -26,7 +26,7 @@ export default {
 emits: ['finish'],
 setup(props, {emit}){
     const items = computed(()=>game.value.currentLevel?.items);
-
+    const playgroundContainer = ref();
     const playerInventory = computed(()=>game.value.player.inventory);
     const dragging = ref();
 
@@ -44,11 +44,17 @@ setup(props, {emit}){
     onMounted(()=>{
           document.addEventListener("mouseup", drop);
           document.addEventListener("mousemove",moveDrag);
+          window.addEventListener("resize", resize);
+          resize();
       });
 
       onBeforeUnmount(()=>{
         game.value.destroy();
       })
+
+    function resize(){
+      game.value.refreshSize(playgroundContainer?.value.getBoundingClientRect().width, playgroundContainer?.value.getBoundingClientRect().height);
+    };
 
     function interact(item: any){
       game.value.interactWithItem(item);
@@ -70,7 +76,7 @@ setup(props, {emit}){
       dragging.value = item;
     }
 
-    return { game, items, playerInventory, interact, playerSpeech, dragging, moveDrag, drop, selectItem, isOverlayDisplayed };
+    return { game, items, playerInventory, interact, playerSpeech, dragging, moveDrag, drop, selectItem, isOverlayDisplayed, playgroundContainer };
   }
 }
 </script>
@@ -82,7 +88,7 @@ setup(props, {emit}){
   
   height: 100%; 
   padding-bottom: calc(16/9%);
-  background-size: contain;
+  background-size: auto 100%;
   background-repeat: no-repeat;
   background-position: center;
 }
