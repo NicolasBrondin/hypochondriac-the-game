@@ -1,21 +1,29 @@
 <template>
     <div class="credits" :class="gameState">
         <p>Crédits :</p>
-        <p></p>
+        <p><br></p>
         <p>Réma</p>
         <p>Marine Drouin</p>
         <p>Nicolas Brondin-Bernard</p>
         <p>Copyrights : Yoyo Games</p>
+        <audio autoplay loop>
+            <source :src="gameState === 'lost' ? LostBackgroundMusic : WonBackgroundMusic"/>
+        </audio>
+        <i class="rain" v-if="gameState === 'lost'" v-for="r in new Array(150).fill(0)"></i>
     </div>
+
 </template>
 
 <script lang="ts">
+import WonBackgroundMusic from '../assets/sound/won.mp3';
+import LostBackgroundMusic from '../assets/sound/lost.mp3';
+
 import { defineComponent } from 'vue';
 
 export default defineComponent({
     props: ["gameState"],
     setup(props, { emit }){
-        return { emit };
+        return { emit, WonBackgroundMusic, LostBackgroundMusic};
     }
 })
 </script>
@@ -28,6 +36,7 @@ export default defineComponent({
     width: 100%;
     height: 100%;
     background-size: cover;
+    overflow: hidden;
 }
 
 @keyframes slide {

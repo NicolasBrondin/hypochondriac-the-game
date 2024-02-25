@@ -1,4 +1,6 @@
 import Level1BackgroundMusic from '../assets/sound/level-1.mp3';
+import Level2BackgroundMusic from '../assets/sound/level-2.mp3';
+import Level3BackgroundMusic from '../assets/sound/level-3.mp3';
 import Level1BackgroundImage from '../assets/img/levels/level-1.png';
 import Level2BackgroundImage from '../assets/img/levels/level-2.png';
 import Level3BackgroundImage from '../assets/img/levels/level-3.png';
@@ -91,7 +93,7 @@ export default [
     },
     {
         name: "Toilettes",
-        backgroundMusic: Level1BackgroundMusic,
+        backgroundMusic: Level2BackgroundMusic,
         backgroundImage: Level2BackgroundImage,
         initialPlayerText: "Je dois sortir d'ici... Je ne suis pas folle !",
         items: [{
@@ -163,7 +165,7 @@ export default [
     },
     {
         name: "Cuisine",
-        backgroundMusic: Level1BackgroundMusic,
+        backgroundMusic: Level3BackgroundMusic,
         backgroundImage: Level3BackgroundImage,
         initialPlayerText: "Je dois sortir d'ici... Je ne suis pas folle !",
         items: [{

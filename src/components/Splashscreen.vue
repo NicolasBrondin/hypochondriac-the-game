@@ -25,10 +25,10 @@ export default defineComponent({
     background-position: center;
     pointer-events: none;
     animation-name: fade;
-    animation-delay: 2s;
+    animation-delay: 1s;
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
-    z-index: 10;
+    z-index: 999;
     opacity: 1.0;
     background-color: transparent;
     animation-iteration-count: 1;

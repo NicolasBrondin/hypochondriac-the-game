@@ -78,8 +78,10 @@ export class GameController {
         this.currentLevelIndex = id;
         this.currentLevel = this.levels[this.currentLevelIndex];
         if(this.currentLevel){
-            this.audio.playBackgroundAudio(this.currentLevel.backgroundMusic);
-            this.player.say(this.currentLevel.initialPlayerText);
+            setTimeout(()=>{
+                this.audio.playBackgroundAudio(this.currentLevel.backgroundMusic);
+                this.player.say(this.currentLevel.initialPlayerText);
+            }, 1000);
         }
     }
 

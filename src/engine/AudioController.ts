@@ -12,6 +12,7 @@ export class AudioController {
 
     playBackgroundAudio(source: any){
         this.backgroundAudioSource.src = source;
+        this.backgroundAudioSource.volume = 0.3;
         this.backgroundAudioSource.play();
     }
 

@@ -2,9 +2,14 @@
     <div class="menu">
         <p>Touch & Panic</p>
         <button @click="emit('play')">Jouer</button>
-        <audio autoplay>
-            <source src="../assets/sound/level-1.mp3"/>
+        <audio autoplay loop>
+            <source src="../assets/sound/menu.mp3"/>
         </audio>
+        <audio autoplay loop>
+            <source src="../assets/sound/rain.mp3"/>
+        </audio>
+        <i class="rain" v-for="r in new Array(150).fill(0)"></i>
+        <!--<div class="lightning"></div>-->
     </div>
 </template>
 
@@ -31,7 +36,7 @@ export default defineComponent({
 }
 @keyframes breathe {
     0% { transform: scale(1.0);}
-    100% { transform: scale(1.2);}
+    100% { transform: scale(1.1);}
 }
 .menu p {
     font-size: 80px;
@@ -40,13 +45,13 @@ export default defineComponent({
     color: white;
     margin-bottom: 40px;
     text-shadow: 0px 0px 10px black;
-    animation: breathe infinite 1s ease-in-out;
+    animation: breathe infinite 3s ease-in-out;
     animation-direction: alternate;
 }
 
 @keyframes arrows {
-    0%{ margin: 0px 0px; }
-    100%{ margin: 0px 10px; }
+    0%{ margin: 0px 5px; }
+    100%{ margin: 0px 15px; }
 }
 .menu button {
     font-size: 40px;
@@ -68,6 +73,31 @@ export default defineComponent({
     animation-direction: alternate;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
-    animation-duration: 1s;
+    animation-duration: 0.75s;
 }
+
+@keyframes light {
+    0% { opacity: 0;}
+    9% { opacity: 0;}
+    10% { opacity: 0.5;}
+    11% { opacity: 0;}
+    50% { opacity: 0;}
+    51% { opacity: 0.7;}
+    52% { opacity: 0;}
+    100% { opacity: 0;}
+}
+
+.lightning {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0;
+    animation: light 3s linear 10s infinite;
+}
+
 </style>
