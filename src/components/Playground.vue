@@ -2,6 +2,9 @@
   <div id="playground" ref="playgroundContainer" :style="'background-image: url('+game.currentLevel?.backgroundImage+')'">
       <div class="gradient"></div>
       <!--<div class="transition-overlay" :class="{'active': isOverlayDisplayed}">{{ game.currentLevel?.name }}</div>-->
+      <div class="item-overlay" @click="game.photoOverlayContent = null" v-if="game.photoOverlayContent">
+        <img :src="game.photoOverlayContent"/>
+      </div>
       <Item :data="i" v-for="i in items" @interaction="interact" :game="game" :currentItem="dragging" :container="playgroundContainer"/>
       <div class="hud">
         <Player :speech="playerSpeech" :game="game"/>
@@ -156,6 +159,32 @@ img {
   transition: none;
 }
 
+.item-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 15;
+  cursor: pointer;
+}
 
+.item-overlay img {
+  height: 80%;
+  border: 30px solid white;
+  box-shadow: 0px 0px 20px 10px rgba(0,0,0,0.3);
+  transform: rotate(0deg) scaleX(1.0);
+  transition: all 0.5s ease-in;
+}
+.item-overlay img:hover {
+
+  box-shadow: 10px 10px 30px 10px rgba(0,0,0,0.3);
+  transform: rotate(3deg) scaleX(0.9);
+  
+}
 
 </style>

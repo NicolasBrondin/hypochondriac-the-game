@@ -61,6 +61,7 @@ export class GameController {
     player: PlayerController;
     playgroundSize: { width: number; height: number } = { width: 0, height: 0};
     playgroundSourceSize: { width: number; height: number } = { width: 1920, height: 1080};
+    photoOverlayContent?: any;
 
     constructor(onLevelLoaded: any){
         this.onLevelLoaded = onLevelLoaded;
@@ -110,6 +111,10 @@ export class GameController {
                         this.player.say(action.value as string);
                     } else if(action.action === "emotion"){
                         this.player.setEmotion(action.value as string);
+                    } else if(action.action === "sound-effect"){
+                        this.audio.playEffectAudio(action.value as any);
+                    } else if(action.action === "photo"){
+                        this.photoOverlayContent = action.value;
                     } else if(action.action === "win"){
                         this.finishCurrentLevel();
                     } else {

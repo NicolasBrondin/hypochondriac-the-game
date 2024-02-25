@@ -1,12 +1,14 @@
 import Level1BackgroundMusic from '../assets/sound/level-1.mp3';
 import Level1BackgroundImage from '../assets/img/levels/level-1/background.png';
 
+import KnockSoundEffect from '../assets/sound/effects/knock.mp3';
+
 import BedsideTableSprite from '../assets/img/levels/level-1/bedside-table.png';
 import PhotoSprite from '../assets/img/levels/level-1/photo.png';
 import DrawerSprite from '../assets/img/levels/level-1/drawer.png';
 import Doorknob from "../assets/img/levels/level-1/doorknob.png";
 import CleanDoorknob from "../assets/img/levels/level-1/doorknob-clean.png";
-import LampSprite from '../assets/img/items/lamp.png';
+import PortraitSprite from '../assets/img/levels/level-1/portrait.png';
 
 import { gelItem } from './items';
 
@@ -35,10 +37,55 @@ export default {
             width: 90,
             height: 99,
             mergeWith: [],
-            interactions: [],
+            interactions: [
+                {
+                    actions: [
+                        {
+                            action: "photo",
+                            value: PortraitSprite
+                        }
+                    ]
+                }
+            ],
             uses: []
         },
-
+        {
+            id:"bed",
+            x: -25,
+            y: 50,
+            width: 400,
+            height: 400,
+            mergeWith: [],
+            interactions: [
+                {
+                    actions: [{
+                        action: "say", value: "Je pense que j'ai assez d'énergie pour m'enfuir..."
+                    }]
+                }
+            ],
+            uses: []
+        },
+        {
+            id:"window",
+            x: -680,
+            y: -270,
+            width: 250,
+            height: 250,
+            mergeWith: [],
+            interactions: [
+                {
+                    actions: [
+                        {
+                            action: "say", value: "La fenêtre est trop solide et n'a pas de poignée... Dommage."
+                        },
+                        {
+                            action: "sound-effect", value: KnockSoundEffect
+                        }
+                    ]
+                }
+            ],
+            uses: []
+        },
         gelItem,
         {
             id:"drawer",
