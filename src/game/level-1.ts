@@ -2,6 +2,7 @@ import Level1BackgroundMusic from '../assets/sound/level-1.mp3';
 import Level1BackgroundImage from '../assets/img/levels/level-1/background.png';
 
 import KnockSoundEffect from '../assets/sound/effects/knock.mp3';
+import OpenSoundEffect from '../assets/sound/effects/open.mp3';
 
 import BedsideTableSprite from '../assets/img/levels/level-1/bedside-table.png';
 import PhotoSprite from '../assets/img/levels/level-1/photo.png';
@@ -97,7 +98,8 @@ export default {
             mergeWith: [],
             interactions: [
                 { actions: [
-                    {action: "state", value: "hidden"}
+                    {action: "state", value: "hidden"},
+                    {action: "sound-effect", value: OpenSoundEffect}
                 ]
             }
             ],

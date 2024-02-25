@@ -12,8 +12,9 @@ export class AudioController {
 
     playBackgroundAudio(source: any){
         this.backgroundAudioSource.src = source;
-        this.backgroundAudioSource.volume = 0.3;
+        this.backgroundAudioSource.volume = 0.1;
         this.backgroundAudioSource.play();
+        this.backgroundAudioSource.volume = 0.1;
     }
 
     pauseBackgroundAudio(){

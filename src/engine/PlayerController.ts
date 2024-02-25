@@ -1,6 +1,7 @@
 import { GameController, GameItem } from "./GameController";
 import HeartbeatSoundEffect from '../assets/sound/effects/alarm.mp3';
 import NormalPlayerFace from "../assets/img/player/normal.png";
+import PanicPlayerFace from "../assets/img/player/panic.png";
 
 export class PlayerController {
     text: string = "";
@@ -10,7 +11,7 @@ export class PlayerController {
 
     images = {
         "normal": NormalPlayerFace,
-        "panic": NormalPlayerFace
+        "panic": PanicPlayerFace
     };
 
     constructor(gameController: GameController){

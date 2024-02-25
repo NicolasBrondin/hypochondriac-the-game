@@ -4,6 +4,7 @@ import CraftSoundEffect from '../assets/sound/effects/craft.mp3';
 import WinSoundEffect from '../assets/sound/effects/win.mp3';
 import ClickSoundEffect from '../assets/sound/effects/click.mp3';
 import FailSoundEffect from '../assets/sound/effects/incorrect.mp3';
+import LooseSoundEffect from '../assets/sound/effects/loose.mp3';
 import { PlayerController } from './PlayerController';
 import gameData from '../game/data';
 
@@ -146,6 +147,7 @@ export class GameController {
 
     useItems(sceneItem: GameItem, inventoryItem: GameItem){
         let used = false;
+        let customSoundEffect = false;
         sceneItem.uses.forEach((rule)=>{
             if(rule.item === inventoryItem.id){
                 if(!rule.stateCondition || (rule.stateCondition === sceneItem.state)){
@@ -160,7 +162,11 @@ export class GameController {
                         } else if(action.action === "win"){
                             this.finishCurrentLevel();
                         } else if(action.action === "loose"){
-                            this.onLevelLoaded(true,"lost");
+                            customSoundEffect = true;
+                            this.audio.playEffectAudio(LooseSoundEffect);
+                            setTimeout(()=>{
+                                this.onLevelLoaded(true,"lost");
+                            }, 1000);
                         } else {
                             this.audio.playEffectAudio(ClickSoundEffect);
                         }
@@ -168,9 +174,9 @@ export class GameController {
                 }
             }
         });
-        if(used){
+        if(used && !customSoundEffect){
             this.audio.playEffectAudio(CraftSoundEffect); 
-        } else {
+        } else if(!customSoundEffect) {
             this.audio.playEffectAudio(FailSoundEffect);
         }
     }
