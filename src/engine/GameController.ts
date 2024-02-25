@@ -79,7 +79,12 @@ export class GameController {
 
     finishCurrentLevel(){
         this.audio.playEffectAudio(WinSoundEffect);
-        this.loadLevel(this.currentLevelIndex+1);
+        if(this.currentLevelIndex < this.levels.length -1){
+            this.loadLevel(this.currentLevelIndex+1);
+        } else {
+            this.onLevelLoaded(true, "won");
+        }
+        
     }
 
     interactWithItem(item: GameItem){

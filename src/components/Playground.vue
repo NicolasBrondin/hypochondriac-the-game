@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { Ref, computed, onBeforeMount, onBeforeUnmount, onMounted, ref } from 'vue';
+import { Ref, computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import Item from './Item.vue';
 import Player from './Player.vue';
 import Inventory from './Inventory.vue';
@@ -23,16 +23,21 @@ export default {
     Inventory,
     Player
 },
-  setup(){
+emits: ['finish'],
+setup(props, {emit}){
     const items = computed(()=>game.value.currentLevel?.items);
 
     const playerInventory = computed(()=>game.value.player.inventory);
     const dragging = ref();
 
     const isOverlayDisplayed = ref(false);
-    const game: Ref<GameController> = ref(new GameController(()=>{
-      isOverlayDisplayed.value = true;
-      setTimeout(()=>isOverlayDisplayed.value = false, 1000);
+    const game: Ref<GameController> = ref(new GameController((isFinished: boolean, newGameState?: string)=>{
+      if(isFinished){
+        emit('finish', newGameState)
+      } else {
+        isOverlayDisplayed.value = true;
+        setTimeout(()=>isOverlayDisplayed.value = false, 1000);
+      }
     }));
     const playerSpeech = computed(()=>game.value.player.text);
 

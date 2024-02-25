@@ -1,23 +1,33 @@
 <template>
+  <Splashscreen/>
   <Menu v-if="gameState === 'menu'" @play="gameState='playing'"/>
-  <Playground v-if="gameState === 'playing'"/>
+  <Playground v-if="gameState === 'playing'" @finish="setState"/>
+  <Credits v-if="gameState === 'won' || gameState === 'lost' " :gameState="gameState" />
 </template>
 
 <script lang="ts">
 
-import { ref } from 'vue';
+import { defineComponent, ref } from 'vue';
 import Menu from './components/Menu.vue';
+import Credits from './components/Credits.vue';
 import Playground from './components/Playground.vue';
-export default {
+import Splashscreen from './components/Splashscreen.vue';
+
+export default defineComponent({
   components: {
     Playground,
-    Menu
+    Menu,
+    Credits,
+    Splashscreen
 },
   setup(){
     const gameState = ref("menu");
-    return { gameState };
+    function setState(s: string){
+      gameState.value = s;
+    }
+    return { gameState, setState };
   }
-}
+});
 </script>
 
 <style scoped>

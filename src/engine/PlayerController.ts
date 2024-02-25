@@ -1,5 +1,5 @@
 import { GameController, GameItem } from "./GameController";
-
+import HeartbeatSoundEffect from '../assets/sound/effects/alarm.mp3';
 import NormalPlayerFace from "../assets/img/player/normal.png";
 
 export class PlayerController {
@@ -25,6 +25,7 @@ export class PlayerController {
         this.emotion = emotion;
         if(emotion === 'panic'){
             setTimeout(()=>{this.emotion="normal"},3000);
+            this.game.audio.playEffectAudio(HeartbeatSoundEffect,0.5,2.5);
         }
     }
 }

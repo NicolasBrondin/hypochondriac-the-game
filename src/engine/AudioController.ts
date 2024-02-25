@@ -19,8 +19,18 @@ export class AudioController {
         this.backgroundAudioSource.pause();
     }
 
-    playEffectAudio(source: any){
+    playEffectAudio(source: any, volume?: number, speed?: number){
         this.effectAudioSource.src = source;
+        if(volume != null){
+            this.effectAudioSource.volume = volume;
+        } else {
+            this.effectAudioSource.volume = 1.0;
+        }
+        if(speed != null){
+            this.effectAudioSource.playbackRate = speed;
+        } else {
+            this.effectAudioSource.playbackRate = 1.0;
+        }
         this.effectAudioSource.play();
     }
 

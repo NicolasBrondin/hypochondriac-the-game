@@ -37,6 +37,13 @@ export default defineComponent({
     color: #5CD2E6;
     margin-top: 40px;
 }
+.player.panic {
+
+    animation-name: shake;
+    animation-duration: 0.75s;
+    animation-iteration-count: 4;
+    animation-timing-function: linear;
+}
 .player-avatar {
     position: absolute;
     left: 20px;
@@ -48,6 +55,18 @@ export default defineComponent({
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
+}
+
+@keyframes shake {
+  0% { transform: rotate(0deg); }
+  12.5% { transform: rotate(2deg); }
+  25% { transform: rotate(0deg); }
+  37.5% { transform: rotate(-2deg); }
+  50% { transform: rotate(0deg); }
+  62.6% { transform: rotate(2deg); }
+  75% { transform: rotate(0deg); }
+  87.5% { transform: rotate(-2deg); }
+  100% { transform: rotate(0deg); }
 }
 
 @keyframes flash {
