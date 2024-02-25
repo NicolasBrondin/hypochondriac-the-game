@@ -89,7 +89,6 @@ setup(props, {emit}){
 
 #playground {
   position: relative;
-  
   height: 100%; 
   padding-bottom: calc(16/9%);
   background-size: auto 100%;
@@ -98,12 +97,14 @@ setup(props, {emit}){
 }
 
 .gradient {
+  position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
   pointer-events: none;
   background: linear-gradient(rgba(0,0,0,0.0) 50%, rgba(0,0,0,1.0));
+  z-index:5;
 }
 .dragged {
     position: absolute;
@@ -129,6 +130,7 @@ img {
   display: flex;
   padding: 10px;
   gap: 10px;
+  z-index: 5;
 }
 
 .hud>* {

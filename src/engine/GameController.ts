@@ -161,7 +161,11 @@ export class GameController {
                             this.player.setEmotion(action.value as string);
                         } else if(action.action === "win"){
                             this.finishCurrentLevel();
-                        } else if(action.action === "loose"){
+                            customSoundEffect = true;
+                        } else if(action.action === "add-item"){
+                            //@ts-ignore
+                            this.currentLevel.items.push(action.value);
+                        }else if(action.action === "loose"){
                             customSoundEffect = true;
                             this.audio.playEffectAudio(LooseSoundEffect);
                             setTimeout(()=>{
