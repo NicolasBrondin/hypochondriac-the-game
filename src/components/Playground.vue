@@ -109,6 +109,7 @@ setup(props, {emit}){
 .dragged {
     position: absolute;
     pointer-events: none;
+    z-index: 999;
 }
 
 img {

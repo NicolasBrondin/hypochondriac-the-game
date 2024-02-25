@@ -27,7 +27,7 @@ import SmokeDetectorSprite from '../assets/img/levels/level-3/smoke-detector.png
 import JeanSprite from '../assets/img/levels/level-3/jean.png';
 
 
-import { gelItem } from './items';
+import { gelItem, stickItem } from './items';
 
 export default {
     name: "Cuisine",
@@ -75,13 +75,15 @@ export default {
             y: 400,
             width: 283,
             height: 48,
-            mergeWith: [],
+            mergeWith: [
+                { item: "broom", newItem: stickItem, isBidirectional: true}
+            ],
             interactions: [{ 
                 stateCondition: null,
                 actions: [{
                     action: "take" 
                 }]
-            }]
+            }],
           },
           {
             id:"lighter",
@@ -143,7 +145,16 @@ export default {
                 actions: [{
                     action: "take" 
                 }]
-            }*/]
+            }*/],
+            uses: [
+
+            { 
+                item: "torch", 
+                actions: [
+                    { action: "win"}
+                ] 
+            }
+            ]
           },
         {
         id:"socket",

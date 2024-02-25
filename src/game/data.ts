@@ -7,7 +7,7 @@ import level3 from './level-3';
 import { GameLevel } from '../engine/GameController';
 
 export default [
-    level3,
+    level1,
     level2,
-    level1
+    level3
 ] as GameLevel[]
