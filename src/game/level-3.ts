@@ -33,7 +33,8 @@ export default {
     name: "Cuisine",
     backgroundMusic: Level3BackgroundMusic,
     backgroundImage: Level3BackgroundImage,
-    initialPlayerText: "Je dois trouver un moyen de vider le batiment !",
+    inventoryBlacklist: ["toilet-paper", "gloves"],
+    initialPlayerText: "Si je créé la panique, je passerai inaperçue !",
     items: [
         {
             id:"fork",

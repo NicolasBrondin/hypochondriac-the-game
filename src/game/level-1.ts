@@ -15,6 +15,7 @@ import { gelItem } from './items';
 
 export default {
     name: "Chambre",
+    inventoryBlacklist: [],
     backgroundMusic: Level1BackgroundMusic,
     backgroundImage: Level1BackgroundImage,
     initialPlayerText: "Je dois sortir d'ici... Je ne suis pas folle !",

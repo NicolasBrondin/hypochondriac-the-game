@@ -1,7 +1,7 @@
 <template>
   <div id="playground" ref="playgroundContainer" :style="'background-image: url('+game.currentLevel?.backgroundImage+')'">
       <div class="gradient"></div>
-      <!--<div class="transition-overlay" :class="{'active': isOverlayDisplayed}">{{ game.currentLevel?.name }}</div>-->
+      <div class="transition-overlay" :class="{'active': isOverlayDisplayed}">{{ game.currentLevel?.name }}</div>
       <div class="item-overlay" @click="game.photoOverlayContent = null" v-if="game.photoOverlayContent">
         <img :src="game.photoOverlayContent"/>
       </div>

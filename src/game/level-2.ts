@@ -16,13 +16,14 @@ import ToiletPaperIcon from '../assets/img/levels/level-2/icon-toilet-paper.png'
 import BlouseIcon from '../assets/img/levels/level-2/icon-blouse.png';
 import BroomIcon from '../assets/img/levels/level-2/icon-broom.png';
 import GlovesIcon from '../assets/img/levels/level-2/icon-gloves.png';
-import { blockItem } from './items';
+import { blockItem, stickItem } from './items';
 
 export default {
     name: "Toilettes",
     backgroundMusic: Level2BackgroundMusic,
     backgroundImage: Level2BackgroundImage,
     initialPlayerText: "Il y a des gens dans le couloir, je dois faire diversion...",
+    inventoryBlacklist: ["gel"],
     items: [
         {
             id:"toilet-paper",
@@ -99,7 +100,11 @@ export default {
             interactions: [{ 
                 stateCondition: null,
                 actions: [{
-                    action: "take" 
+                    action: "state", value:"hidden", 
+                },{
+                    action: "add-inventory", value: stickItem, 
+                },{
+                    action: "say", value: "Ca pourrait me servir...", 
                 }]
             }]
         },

@@ -50,6 +50,7 @@ export type GameLevel = {
     backgroundMusic: any;
     backgroundImage: any;
     initialPlayerText: string;
+    inventoryBlacklist: string[];
 }
 
 export class GameController {
@@ -80,7 +81,7 @@ export class GameController {
         this.currentLevelIndex = id;
         this.currentLevel = this.levels[this.currentLevelIndex];
         if(this.currentLevel){
-
+            this.player.inventory = this.player.inventory.filter((item)=>this.currentLevel?.inventoryBlacklist.indexOf(item.id) == -1);
             this.player.say(this.currentLevel.initialPlayerText);
             setTimeout(()=>{
                 this.audio.playBackgroundAudio(this.currentLevel!.backgroundMusic);
@@ -114,6 +115,9 @@ export class GameController {
                         this.player.setEmotion(action.value as string);
                     } else if(action.action === "sound-effect"){
                         this.audio.playEffectAudio(action.value as any);
+                    } else if(action.action === "add-inventory"){
+                        this.player.inventory.push(action.value as any);
+                        this.audio.playEffectAudio(TakeSoundEffect);
                     } else if(action.action === "photo"){
                         this.photoOverlayContent = action.value;
                     } else if(action.action === "win"){
