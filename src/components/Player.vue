@@ -5,12 +5,12 @@
         <div class="progress">
             <div class="progress-bar"></div>
         </div>
-        {{ speech }}
+        {{ displaySpeech }}
     </div>
 </template>
 
 <script lang="ts">
-import { PropType, computed, defineComponent } from 'vue';
+import { ComputedRef, PropType, computed, defineComponent, onMounted, ref, watch } from 'vue';
 import { GameController } from '../engine/GameController';
 
 export default defineComponent({
@@ -19,10 +19,28 @@ export default defineComponent({
         game: { type: Object as PropType<GameController> }
     },
     setup(props){
-        const avatar = computed(()=>{
+        const speech = computed(()=>props.speech);
+        const avatar: ComputedRef<string> = computed(()=>{
+            //@ts-ignore
             return props.game?.player?.images[props.game?.player?.emotion];
         });
-        return { avatar };
+        let timer: any;
+        const displaySpeech = ref("");
+        onMounted(()=>{
+            animateText();
+        })
+        watch([speech], animateText);
+        function animateText(){
+
+            if(timer){
+                clearInterval(timer);
+            }
+            displaySpeech.value = "";
+            timer = setInterval(()=>{
+                displaySpeech.value = speech.value?.substring(0,displaySpeech.value.length + 1) ?? "";
+            }, 25);
+        }
+        return { avatar, displaySpeech };
     }
 });
 </script>
@@ -34,7 +52,7 @@ export default defineComponent({
     font-size: 22px;
     padding: 10px;
     padding-top: 20px;
-    color: #5CD2E6;
+    color: #3085C3;
     margin-top: 40px;
 }
 .player.panic {

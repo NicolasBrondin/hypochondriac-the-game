@@ -78,19 +78,22 @@ export class GameController {
         this.currentLevelIndex = id;
         this.currentLevel = this.levels[this.currentLevelIndex];
         if(this.currentLevel){
+
+            this.player.say(this.currentLevel.initialPlayerText);
             setTimeout(()=>{
-                this.audio.playBackgroundAudio(this.currentLevel.backgroundMusic);
-                this.player.say(this.currentLevel.initialPlayerText);
+                this.audio.playBackgroundAudio(this.currentLevel!.backgroundMusic);
             }, 1000);
         }
     }
 
     finishCurrentLevel(){
-        this.audio.playEffectAudio(WinSoundEffect);
-        if(this.currentLevelIndex < this.levels.length -1){
-            this.loadLevel(this.currentLevelIndex+1);
-        } else {
-            this.onLevelLoaded(true, "won");
+        if(this.currentLevelIndex != null){
+            this.audio.playEffectAudio(WinSoundEffect);
+            if(this.currentLevelIndex < this.levels.length -1){
+                this.loadLevel(this.currentLevelIndex+1);
+            } else {
+                this.onLevelLoaded(true, "won");
+            }
         }
         
     }
@@ -106,7 +109,7 @@ export class GameController {
                     } else if(action.action === "say"){
                         this.player.say(action.value as string);
                     } else if(action.action === "emotion"){
-                        this.player.setEmotion(action.value);
+                        this.player.setEmotion(action.value as string);
                     } else if(action.action === "win"){
                         this.finishCurrentLevel();
                     } else {
@@ -148,7 +151,7 @@ export class GameController {
                         } else if(action.action === "state"){
                             sceneItem.state = action.value;
                         } else if(action.action === "emotion"){
-                            this.player.setEmotion(action.value);
+                            this.player.setEmotion(action.value as string);
                         } else if(action.action === "win"){
                             this.finishCurrentLevel();
                         } else if(action.action === "loose"){
@@ -168,11 +171,14 @@ export class GameController {
     }
 
     takeItem(item: GameItem){
-        this.player.inventory.push(item);
-        const index = this.currentLevel?.items.findIndex(it=>it.id === item.id);
-        if(index > -1)
-        this.currentLevel?.items.splice(index, 1);
-        this.audio.playEffectAudio(TakeSoundEffect);
+        if(this.currentLevel){
+            this.player.inventory.push(item);
+            const index: number = this.currentLevel.items.findIndex(it=>it.id === item.id);
+            if(index > -1) {
+                this.currentLevel?.items.splice(index, 1);
+                this.audio.playEffectAudio(TakeSoundEffect);
+            }
+        }
     }
 
     refreshSize(width: number, height: number){

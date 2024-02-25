@@ -1,14 +1,15 @@
 <template>
   <div id="playground" ref="playgroundContainer" :style="'background-image: url('+game.currentLevel?.backgroundImage+')'">
       <div class="gradient"></div>
-      <div class="transition-overlay" :class="{'active': isOverlayDisplayed}">{{ game.currentLevel?.name }}</div>
+      <!--<div class="transition-overlay" :class="{'active': isOverlayDisplayed}">{{ game.currentLevel?.name }}</div>-->
       <Item :data="i" v-for="i in items" @interaction="interact" :game="game" :currentItem="dragging" :container="playgroundContainer"/>
       <div class="hud">
         <Player :speech="playerSpeech" :game="game"/>
         <Inventory :data="playerInventory" :game="game" @selection="selectItem" :currentItem="dragging"/>
       </div>
-      <img class="dragged" draggable="false" v-if="dragging" :game="game" :style="'top:'+dragging.y+'px;left:'+dragging.x+'px;'" :src="dragging.image" width="50"/>
+      
   </div>
+  <img class="dragged" draggable="false" v-if="dragging" :game="game" :style="'top:'+dragging.y+'px;left:'+dragging.x+'px;'" :src="dragging.icon" width="50"/>
 </template>
 
 <script lang="ts">
@@ -63,8 +64,8 @@ setup(props, {emit}){
 
     function moveDrag(ev: MouseEvent){
       if(dragging.value){
-          dragging.value.x = ev.x - (dragging.value.width / 2);
-          dragging.value.y = ev.y - (dragging.value.width / 2);
+          dragging.value.x = ev.x - (50 / 2);
+          dragging.value.y = ev.y - (50 / 2);
       }
     }
 

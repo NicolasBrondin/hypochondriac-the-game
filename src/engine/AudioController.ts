@@ -40,9 +40,13 @@ export class AudioController {
     }
 
     destroy(){
+        //@ts-ignore
         this.backgroundAudioSource.src = null;
+        //@ts-ignore
         this.effectAudioSource.src = null;
+        //@ts-ignore
         this.backgroundAudioSource = null;
+        //@ts-ignore
         this.effectAudioSource = null;
     }
 }

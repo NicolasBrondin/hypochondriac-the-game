@@ -1,6 +1,6 @@
 <template>
-    <button @click="onClick" @mouseup="onDrop" :style="computedStyle">
-        <img :src="data.image" v-if="data.image"/>
+    <button @click="onClick" @mouseup="onDrop" :style="computedStyle" v-if="data.state != 'hidden'">
+        <img :src="data.stateImages ? data.stateImages[data.state] : data.image" v-if="data.image"/>
     </button>
 </template>
 
@@ -18,7 +18,8 @@ export default defineComponent({
     emits: ["interaction", "use"],
     setup(props, { emit }){
         const computedStyle = computed(()=>{
-            const ratio = props.game?.playgroundSize.height / props.game?.playgroundSourceSize.height;
+            //@ts-ignore
+            const ratio: number = props.game?.playgroundSize.height / props.game?.playgroundSourceSize.height;
             const width = props.data.width * ratio;
             const height = props.data.height * ratio;
             const x = (props.data.x * ratio) - (width / 2);
@@ -29,7 +30,6 @@ export default defineComponent({
                 `width: ${width}px`,
                 `height: ${height}px`,
             ]
-            console.log(arr.join(";"))
             return arr.join(";");
         });
 

@@ -1,7 +1,7 @@
 <template>
     <div class="inventory">
         <button class="item" @mouseup="onDrop(item)" draggable="false" @mousedown="startDrag(item)" v-for="item in data">
-            <img :src="item.image"/>
+            <img :src="item.icon"/>
         </button>
         <button class="item" v-for="placeholder in new Array(10 - data?.length).fill(0)">
             <div style="width: 40px; height: 40px;"></div>
