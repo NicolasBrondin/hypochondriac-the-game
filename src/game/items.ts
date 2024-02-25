@@ -47,7 +47,7 @@ export const stick2Item = {
     y: 110,
     width: 114,
     height: 47,
-    mergeWith: [{ item: "lighter", newItem: torchItem, isBidirectional: true}],
+    mergeWith: [{ item: "lighter", newItem: torchItem, isBidirectional: true, shouldRemoveItem: true}],
     interactions: [
         
     ],
@@ -61,7 +61,7 @@ export const stickItem = {
     y: 110,
     width: 114,
     height: 47,
-    mergeWith: [ { item: "towel", newItem: stick2Item, isBidirectional: true}],
+    mergeWith: [ { item: "towel", newItem: stick2Item, isBidirectional: true, shouldRemoveItem: true}],
     interactions: [
        
     ],

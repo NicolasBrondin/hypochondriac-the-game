@@ -76,7 +76,7 @@ export default {
             width: 283,
             height: 48,
             mergeWith: [
-                { item: "broom", newItem: stickItem, isBidirectional: true}
+                { item: "broom", newItem: stickItem, isBidirectional: true, shouldRemoveItem: true}
             ],
             interactions: [{ 
                 stateCondition: null,
@@ -148,13 +148,24 @@ export default {
                 }]
             }],
             uses: [
-
-            { 
-                item: "torch", 
-                actions: [
-                    { action: "win"}
-                ] 
-            }
+                { 
+                    item: "lighter", 
+                    actions: [
+                        { action: "say", value: "J'ai le bras trop cours, il me faudrait une torche..."}
+                    ] 
+                },
+                { 
+                    item: "stick", 
+                    actions: [
+                        { action: "say", value: "C'est sensible à la chaleur, pas aux vibrations."}
+                    ] 
+                },
+                { 
+                    item: "torch", 
+                    actions: [
+                        { action: "win"}
+                    ] 
+                }
             ]
           },
         {

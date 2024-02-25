@@ -3,7 +3,7 @@
         <button class="item" @mouseup="onDrop(item)" draggable="false" @mousedown="startDrag(item)" v-for="item in data">
             <img :src="item.icon"/>
         </button>
-        <button class="item" v-for="placeholder in new Array(15 - data?.length).fill(0)">
+        <button class="item" v-for="placeholder in new Array(Math.max(15 - data?.length, 0)).fill(0)">
             <div style="width: 40px; height: 40px;"></div>
         </button>
     </div>

@@ -1,5 +1,6 @@
 import Level2BackgroundMusic from '../assets/sound/level-2.mp3';
 import Level2BackgroundImage from '../assets/img/levels/level-2/background.png';
+import FlushSoundEffect from '../assets/sound/effects/flush.mp3';
 
 import ToiletPaperSprite from '../assets/img/levels/level-2/toilet-paper.png';
 import TowelSprite from '../assets/img/levels/level-2/towel.png';
@@ -119,43 +120,26 @@ export default {
                 }]
             }]
         },
-        {
-        id:"button",
-        x: "-295",
-        y: "-175",
-        width: "100",
-        height: "50",
-        mergeWith: [],
-        interactions: [
-            { 
-                actions: [
-                    { action: "say", value: "Jamais je pourrais toucher un truc aussi sale !" },
-                    { action: "emotion", value: "panic"},
-                ]
-            }
-        ],
-        uses: [
-            { 
-                item: "gloves",
-                actions: [
-                    { action: "win"}
-                ] 
-            }
-        ]
-      },
       {
         id:"toilet",
         x: "-275",
-        y: "-50",
+        y: "-150",
         width: "150",
-        height: "200",
+        height: "300",
         state: "empty",
         mergeWith: [],
         interactions: [
             { 
-        
+                stateCondition: "empty",
                 actions: [
-                    { action: "say", value: "Des toilettes bouchés, ça pourrait faire diversion..." }
+                    { action: "say", value: "Si je bouchais les toilettes, ça pourrait faire diversion..." }
+                ]
+            },
+            { 
+                stateCondition: "full",
+                actions: [
+                    { action: "say", value: "Jamais je pourrais toucher un truc aussi sale !" },
+                    { action: "emotion", value: "panic"}
                 ]
             }
         ],
@@ -166,6 +150,21 @@ export default {
                 actions: [
                     { action: "state", value: "full"},
                     { action: "add-item", value: blockItem}
+                ] 
+            },
+            {
+                stateCondition: "full", 
+                item: "gloves",
+                actions: [
+                    { action: "win"}
+                ] 
+            },
+            {
+                stateCondition: "empty", 
+                item: "gloves",
+                actions: [
+                    { action: "say", value: "La chasse se tire, mais les toilettes ne sont pas bouchés..."},
+                    { action: "sound-effect", value: FlushSoundEffect}
                 ] 
             }
         ]

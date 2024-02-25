@@ -159,6 +159,9 @@ export class GameController {
                             sceneItem.state = action.value;
                         } else if(action.action === "emotion"){
                             this.player.setEmotion(action.value as string);
+                        } else if(action.action === "sound-effect"){
+                            customSoundEffect = true;
+                            this.audio.playEffectAudio(action.value as any);
                         } else if(action.action === "win"){
                             this.finishCurrentLevel();
                             customSoundEffect = true;
