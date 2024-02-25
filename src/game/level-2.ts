@@ -21,7 +21,7 @@ export default {
     name: "Toilettes",
     backgroundMusic: Level2BackgroundMusic,
     backgroundImage: Level2BackgroundImage,
-    initialPlayerText: "Je dois sortir d'ici... Je ne suis pas folle !",
+    initialPlayerText: "Il y a des gens dans le couloir, je dois faire diversion...",
     items: [
         {
             id:"toilet-paper",
@@ -155,8 +155,7 @@ export default {
             { 
         
                 actions: [
-                    { action: "say", value: "Jamais je pourrais toucher un truc aussi sale !" },
-                    { action: "emotion", value: "panic"},
+                    { action: "say", value: "Des toilettes bouchés, ça pourrait faire diversion..." }
                 ]
             }
         ],

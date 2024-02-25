@@ -33,7 +33,7 @@ export default {
     name: "Cuisine",
     backgroundMusic: Level3BackgroundMusic,
     backgroundImage: Level3BackgroundImage,
-    initialPlayerText: "Je dois sortir d'ici... Je ne suis pas folle !",
+    initialPlayerText: "Je dois trouver un moyen de vider le batiment !",
     items: [
         {
             id:"fork",
@@ -140,12 +140,13 @@ export default {
             width: 106,
             height: 100,
             mergeWith: [],
-            interactions: [/*{ 
+            interactions: [{ 
                 stateCondition: null,
                 actions: [{
-                    action: "take" 
+                    action: "say",
+                    value: "Je ne peux pas l'atteindre, si seulement j'avais un baton" 
                 }]
-            }*/],
+            }],
             uses: [
 
             { 
